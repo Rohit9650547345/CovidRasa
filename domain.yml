@@ -1,0 +1,155 @@
+version: '2.0'
+config:
+  store_entities_as_slots: true
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
+intents:
+- start:
+    use_entities: true
+- greet:
+    use_entities: true
+- covid_district:
+    use_entities: true
+- covid_state:
+    use_entities: true
+- covid_date:
+    use_entities: true
+- about:
+    use_entities: true
+- cases:
+    use_entities: true
+- choose_district:
+    use_entities: true
+- choose_state:
+    use_entities: true
+- choose_india:
+    use_entities: true
+- affirm_past:
+    use_entities: true
+- deny_past:
+    use_entities: true
+- affirm:
+    use_entities: true
+- deny:
+    use_entities: true
+- affirm_more:
+    use_entities: true
+- faq_distancing:
+    use_entities: true
+- faq_symptoms:
+    use_entities: true
+- faq_vulnerable:
+    use_entities: true
+- faq_testing:
+    use_entities: true
+- faq_supplies:
+    use_entities: true
+- faq_whatisit:
+    use_entities: true
+- out_of_scope:
+    use_entities: true
+entities:
+- state
+- district
+- date
+slots:
+  state:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
+  district:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
+  date:
+    type: rasa.shared.core.slots.UnfeaturizedSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+responses:
+  utter_greet:
+  - buttons:
+    - payload: /about
+      title: About Covid-19
+    - payload: /cases
+      title: Covid Cases in India
+    text: |-
+      Hey! 
+      How may I help you?
+  utter_faq:
+  - text: What do you want to know?
+  utter_more_faq:
+  - buttons:
+    - payload: /affirm_more
+      title: Yes
+    - payload: /deny_past
+      title: No
+    text: Have more questions?
+  utter_cases:
+  - buttons:
+    - payload: '/choose_state{"state": "India"}'
+      title: India's Cases
+    - payload: /choose_state
+      title: State Wise Cases
+    - payload: /choose_district
+      title: District Wise Cases
+    text: What do you want to search by?
+  utter_covid_state:
+  - text: Enter state
+  utter_covid_district:
+  - text: Enter district, state
+  utter_by_date:
+  - buttons:
+    - payload: /affirm_past
+      title: Yes
+    - payload: /deny_past
+      title: No
+    text: Want to know more about past cases?
+  utter_choose_date:
+  - text: Enter Date ( dd-mm-yyyy )
+  utter_ask_continue:
+  - buttons:
+    - payload: /affirm
+      title: Yes
+    - payload: /deny
+      title: No
+    text: Is there anything else that i can help you with?
+  utter_end:
+  - text: |-
+      Thanks for the visit.
+      Wear mask, wash your hands regularly and keep 3m distance from each other. 
+      Stay Home, Stay safe.
+  utter_faq_distancing:
+  - text: Social distancing, also called “physical distancing,” means keeping space between yourself and other people outside of your home. To practice social or physical distancing Stay at least 6 feet (2 meters) from other people Do not gather in groups Stay out of crowded places and avoid mass gatherings
+  - text: Social distancing, or physical distancing, is a set of non-pharmaceutical interventions or measures taken to prevent the spread of a contagious disease by maintaining a physical distance between people and reducing the number of times people come into close contact with each other.
+  - text: The new coronavirus is a respiratory virus which spreads primarily through droplets generated when an infected person coughs or sneezes, or through droplets of saliva or discharge from the nose. To protect yourself, clean your hands frequently with an alcohol-based hand rub or wash them with soap and water.
+  utter_faq_supplies:
+  - text: India is adapting the world’s largest portfolio of food distribution and safety net programs to provide food to its poorest citizens
+  - text: All the necessary and essential supplies will be available. Online Food, grocery Delivery companies will be operational.
+  utter_faq_symptoms:
+  - text: COVID-19 affects different people in different ways. Most infected people will develop mild to moderate symptoms.Common symptoms:fever, tiredness, dry coughSome people may experience:aches and pains, nasal congestion, runny nose, sore throat, diarrhoea. On average it takes 5–6 days from when someone is infected with the virus for symptoms to show, however it can take up to 14 days
+  - text: The virus can cause a range of symptoms, from ranging from mild illness to pneumonia. Symptoms of the disease are fever, cough, sore throat and headaches.
+  - text: Most people infected with the COVID-19 virus will experience mild to moderate respiratory illness and recover without requiring special treatment. Older people, and those with underlying medical problems like cardiovascular disease, diabetes, chronic respiratory disease, and cancer are more likely to develop serious illness.
+  - text: People with COVID-19 generally develop signs and symptoms, including mild respiratory symptoms and fever, on an average of 5-6 days after infection (mean incubation period 5-6 days, range 1-14 days). Most people infected with COVID-19 virus have mild disease and recover.
+  utter_faq_testing:
+  - text: Covid-19 testing can identify the SARS-CoV-2 virus (virus responsible for COVID-19) and includes methods that detect the presence of virus itself (RT-PCR and isothermal nucleic acid amplification) and those that detect antibodies produced in response to infection
+  - text: COVID-19 testing differs by location. If you have symptoms of COVID-19 and want to get tested, call your medical provider first. You can also visit your state or health department’s website to look for the latest local information on testing. While supplies of these tests are increasing, it may still be difficult to find a place to get tested.
+  utter_faq_vulnerable:
+  - text: People of all ages can be infected by the new coronavirus (2019-nCoV). Older people, and people with pre-existing medical conditions (such as asthma, diabetes, heart disease) appear to be more vulnerable to becoming severely ill with the virus.
+  - text: Current evidence on other coronavirus strains shows that while coronaviruses appear to be stable at low and freezing temperatures for a certain period, food hygiene and good food safety practices can prevent their transmission through food.
+  utter_faq_whatisit:
+  - text: Coronaviruses are a family of viruses that range from the common cold to MERS coronavirus, which is Middle East Respiratory Syndrome coronavirus and SARs, Severe acute respiratory syndrome coronavirus.
+  - text: The new coronavirus is a respiratory virus which spreads primarily through droplets generated when an infected person coughs or sneezes, or through droplets of saliva or discharge from the nose. To protect yourself, clean your hands frequently with an alcohol-based hand rub or wash them with soap and water.
+  utter_how_can_i_help:
+  - text: Hi! I am Covid-19 assistant. I can give you basic information on COVID-19, test centers, hospital and statistics.
+  utter_out_of_scope:
+  - text: I wish I could answer your question, Please ask some other question please.
+  - text: Sorry I don't know the answer, can you please ask questions related to COVID-19?
+actions:
+- action_covid_tracker_district
+- action_reset
+forms: {}
+e2e_actions: []

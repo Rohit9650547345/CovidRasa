@@ -1,0 +1,140 @@
+version: "2.0"
+stories:
+- story: start path
+  steps:
+  - intent: start
+  - action: utter_greet
+- story: hello path
+  steps:
+  - intent: greet
+  - action: utter_greet
+- story: about path
+  steps:
+  - intent: about
+  - action: utter_faq
+- story: affirm for more faq
+  steps:
+  - intent: affirm_more
+  - action: utter_faq
+- story: cases path
+  steps:
+  - intent: cases
+  - action: utter_cases
+- story: corona tracker state
+  steps:
+  - intent: choose_state
+  - action: utter_covid_state
+  - intent: covid_state
+    entities:
+    - state: Delhi
+    - date: 12-12-2020
+  - slot_was_set:
+    - state: Delhi
+  - slot_was_set:
+    - date: 12-12-2020
+  - action: action_covid_tracker_district
+  - action: utter_by_date
+  - intent: affirm_past
+  - action: utter_choose_date
+  - intent: covid_date
+    entities:
+    - date: 12-12-2020
+  - slot_was_set:
+    - date: 12-12-2020
+  - action: action_covid_tracker_district
+  - action: utter_by_date
+- story: corona tracker district
+  steps:
+  - intent: choose_district
+  - action: utter_covid_district
+  - intent: covid_district
+    entities:
+    - state: Delhi
+    - district: Shahdara
+    - date: 12-12-2020
+  - slot_was_set:
+    - state: Delhi
+  - slot_was_set:
+    - district: Shahdara
+  - slot_was_set:
+    - date: 12-12-2020
+  - action: action_covid_tracker_district
+  - action: utter_by_date
+  - intent: affirm_past
+  - action: utter_choose_date
+  - intent: covid_date
+    entities:
+    - date: 12-12-2020
+  - slot_was_set:
+    - date: 12-12-2020
+  - action: action_covid_tracker_district
+  - action: utter_by_date
+- story: corona tracker india
+  steps:
+  - intent: choose_india
+    entities:
+    - state: India
+    - date: 12-12-2020
+  - slot_was_set:
+    - state: India
+  - slot_was_set:
+    - date: 12-12-2020
+  - action: action_covid_tracker_district
+  - action: utter_by_date
+  - intent: affirm_past
+  - action: utter_choose_date
+  - intent: covid_date
+    entities:
+    - date: 12-12-2020
+  - slot_was_set:
+    - date: 12-12-2020
+  - action: action_covid_tracker_district
+  - action: utter_by_date
+- story: deny past
+  steps:
+  - intent: deny_past
+  - action: action_reset
+  - action: utter_ask_continue
+- story: end path
+  steps:
+  - intent: deny
+  - action: utter_end
+- story: continue again
+  steps:
+  - intent: affirm
+  - action: utter_greet
+- story: out_of_scope_story
+  steps:
+  - intent: out_of_scope
+  - action: utter_out_of_scope
+  - action: utter_more_faq
+- story: faq_distancing_story
+  steps:
+  - intent: faq_distancing
+  - action: utter_faq_distancing
+  - action: utter_more_faq
+- story: faq_symptoms_story
+  steps:
+  - intent: faq_symptoms
+  - action: utter_faq_symptoms
+  - action: utter_more_faq
+- story: faq_vulnerable_story
+  steps:
+  - intent: faq_vulnerable
+  - action: utter_faq_vulnerable
+  - action: utter_more_faq
+- story: faq_testing_story
+  steps:
+  - intent: faq_testing
+  - action: utter_faq_testing
+  - action: utter_more_faq
+- story: faq_supplies_story
+  steps:
+  - intent: faq_supplies
+  - action: utter_faq_supplies
+  - action: utter_more_faq
+- story: faq_whatisit_story
+  steps:
+  - intent: faq_whatisit
+  - action: utter_faq_whatisit
+  - action: utter_more_faq
