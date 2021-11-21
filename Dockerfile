@@ -14,6 +14,7 @@ WORKDIR /app
 # upgrade pip version
 RUN pip install --no-cache-dir --upgrade pip
 
+RUN pip install pandas
 RUN pip install rasa==2.8.1
 
 ADD config.yml config.yml
